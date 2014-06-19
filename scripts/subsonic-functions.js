@@ -81,6 +81,16 @@ s2t.main.persistStarredObjects = function (callback)
 				s2t.starredObjects[data.artist.id] = data.artist;
 			}
 		}
+		//playlists
+		if(_.has(data, 'playlist')){
+			if (data.playlist instanceof Array) {
+				for(var i=0; i<data.playlist.length; i++) {
+					s2t.starredObjects[data.playlist[i].id] = data.playlist[i];
+				}
+			} else {
+				s2t.starredObjects[data.playlist.id] = data.playlist;
+			}
+		}
 		callback('ready');
 	});
 }

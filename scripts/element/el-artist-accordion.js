@@ -57,6 +57,7 @@ s2t.main.createArtistAccordion = function (callback) {
 
 			accordionToggle.on('click', function() {
 				jQuery('#artist-accordion').mCustomScrollbar("update");
+				console.log("updateaccordion");
 			});
 
 			accordionInner.append(list);

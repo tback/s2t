@@ -39,7 +39,8 @@ s2t.trackMap = [];
 s2t.topTrackList = [];
 //starredObjects for search purposes (!)
 s2t.starredObjects = [];
-
+//plalistMap for search purposes (!)
+s2t.playlistMap = [];
 
 s2t.initializePersistence = function () {
 	//fetch data

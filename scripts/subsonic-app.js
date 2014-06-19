@@ -19,7 +19,12 @@ s2t.main.initializeApp = function () {
 		s2t.main.createArtistAccordion_(function() {
 			s2t.main.initializeSearchbar();
 		});
+		
+		s2t.main.createPlaylistAccordion(function() {
+			s2t.main.initializeSearchbar();
+		});
 
+		
 		s2t.main.createCustomScrollbar(jQuery('.playlist-table'));
 
 	});

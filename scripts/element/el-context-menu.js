@@ -68,7 +68,15 @@ s2t.main.initializeCustomContextMenu = function () {
 //					s2t.main.setCurrentlyPlayingInformation(song);
 //					s2t.sound.play(song.songId);
 				}
+			},
+			addToPlaylist: {
+				name: "Add To Playlist", callback: function (key, opt) {
+//					var song = opt.$trigger.find('td.song a').data('signature');
+//					s2t.main.setCurrentlyPlayingInformation(song);
+//					s2t.sound.play(song.songId);
+				}
 			}
+
 		}
 	});
 

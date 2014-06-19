@@ -14,6 +14,15 @@ s2t.behaviour.setArtistClickBehaviour = function (element) {
 	});
 }
 
+s2t.behaviour.setPlaylistClickBehaviour = function (element) {
+
+	element.on('click', function (event) {
+		event.preventDefault();
+		var playlistId = jQuery(event.target).data('playlistid');
+		s2t.main.displayPlaylist(playlistId);
+		console.log(playlistId);
+	});
+}
 
 s2t.behaviour.setStarBehaviour = function (element, id) {
 
