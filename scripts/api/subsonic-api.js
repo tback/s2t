@@ -340,7 +340,7 @@ s2t.api.createPlaylist = function (playlistId, name, songIdArray, callback)
 
 s2t.api.updatePlaylist = function (playlistId, name, comment, public, songIdToAddArray, songIndexToRemoveArray, callback)
 {
-	var command = 'createPlaylist';
+	var command = 'updatePlaylist';
 	var params = {
 		playlistId: playlistId,
 		name: name,

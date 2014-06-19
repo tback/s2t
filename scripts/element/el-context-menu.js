@@ -71,9 +71,8 @@ s2t.main.initializeCustomContextMenu = function () {
 			},
 			addToPlaylist: {
 				name: "Add To Playlist", callback: function (key, opt) {
-//					var song = opt.$trigger.find('td.song a').data('signature');
-//					s2t.main.setCurrentlyPlayingInformation(song);
-//					s2t.sound.play(song.songId);
+					var song = opt.$trigger.find('td.song a').data('signature');
+/* 					s2t.api.updatePlaylist = function ("1", undefined, undefined, undefined, song.id.toString(), undefined, callback); */
 				}
 			}
 
