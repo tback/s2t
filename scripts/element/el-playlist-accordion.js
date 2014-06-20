@@ -48,11 +48,6 @@ s2t.main.createPlaylistAccordion = function () {
 				s2t.playlistMap[playlistName.toString()] = playlistId.toString();
 				
 			}
-
-			playlistToggle.on('click', function() {
-				jQuery('#playlist-accordion').mCustomScrollbar("update");
-			});
-
 			playlistInner.append(list);
 			accordion.append(playlistContent);
 

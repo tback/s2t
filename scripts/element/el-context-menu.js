@@ -176,8 +176,9 @@ s2t.main.initializeCustomContextMenu = function () {
 					var song = opt.$trigger.find('td.song a').data('signature');
 					console.log(song.songId);
 					s2t.api.updatePlaylist(s2t.currentPlaylistId,undefined, undefined, undefined, undefined, opt.$trigger.index(), function (data){
-					console.log(data);
 					});
+					s2t.main.displayPlaylist(s2t.currentPlaylistId);
+
                 }
 
 			}

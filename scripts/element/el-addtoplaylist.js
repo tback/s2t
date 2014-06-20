@@ -42,6 +42,7 @@ s2t.main.showAddToPlaylist = function (songId) {
 		}
 		$('#addtoplaylisttable div').empty().remove();
 		playlisttoAddIdArray = [];
+		s2t.main.displayPlaylist(s2t.currentPlaylistId);
 		playlistsContainer.modal('hide');
 	});
 	buttonCancel.on('click', function() {
