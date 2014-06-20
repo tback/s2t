@@ -10,6 +10,7 @@ s2t.behaviour.setArtistClickBehaviour = function (element) {
 
 		s2t.api.getArtist(artistId, function (data) {
 			s2t.main.createAlbumView(data);
+			console.log(data.artist.name);
 		});
 	});
 }

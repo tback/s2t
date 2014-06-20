@@ -6,10 +6,9 @@ s2t.main = s2t.main || {}
 /* --------------------------------------------------
  :: Create playlist Accordion
  ---------------------------------------------------*/
-s2t.main.createPlaylistAccordion = function (callback) {
+s2t.main.createPlaylistAccordion = function () {
 	s2t.api.getPlaylists(function(data) {
 
-		console.log(data);
 		console.log(data.playlists.playlist);
 		var playlistArray = data.playlists.playlist;
 		var playlistMap = [];
@@ -70,7 +69,7 @@ s2t.main.createPlaylistAccordion = function (callback) {
 
 		s2t.data.playlists = playlistArray;
 
-		callback('done');
+		//callback('done');
 	});
 }
 

@@ -7,9 +7,9 @@ s2t.main = s2t.main || {}
  :: Create artist Accordion
  ---------------------------------------------------*/
 s2t.main.createArtistAccordion = function (callback) {
-	s2t.api.getIndexes(function (data) {
+	s2t.api.getArtists(function (data) {
 
-		var bigList = data.indexes.index;
+		var bigList = data.artists.index;
 
 		var artistArray = [];
 		var artistMap = [];
@@ -18,7 +18,6 @@ s2t.main.createArtistAccordion = function (callback) {
 		for (var i = 0; i < bigList.length; i++) {
 			var key = bigList[i].name;
 			var artistList = bigList[i].artist;
-
 			var accordionGroup = jQuery('<div class="accordion-group"></div>');
 			var accordionHeading = jQuery('<div class="accordion-heading"></div>');
 			var accordionToggle = jQuery('<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#artist-accordion" href="#group-' + key + '">' + key + '</a>');
@@ -42,7 +41,9 @@ s2t.main.createArtistAccordion = function (callback) {
 					var listItem = jQuery('<li><a href="#" data-artistId="' + artistId + '">' + artist + '</a></li>');
 					list.append(listItem);
 					artistArray.push(artist);
+					console.log(artistArray);
 					artistMap[artist.toString()] = artistId.toString();
+					console.log(artistMap);
 					s2t.artistMap[artist.toString()] = artistId.toString();
 				}
 			} else {
@@ -90,6 +91,8 @@ s2t.main.createArtistAccordion_ = function (callback) {
 		var artistArray = [];
 		var artistMap = [];
 		var accordion = jQuery('#artist-accordion');
+		console.log(data);
+
 
 		for (var i = 0; i < bigList.length; i++) {
 			var key = bigList[i].name;

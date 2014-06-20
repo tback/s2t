@@ -8,6 +8,8 @@ s2t.main = s2t.main || {}
  ---------------------------------------------------*/
 s2t.main.createAlbumView = function (data) {
 	var element = jQuery('div.artist-albums');
+	
+	console.log(data.artist.name);
 
 	//clean container
 	element.children().remove();
@@ -15,6 +17,7 @@ s2t.main.createAlbumView = function (data) {
 	//Tabs
 	var tabs = jQuery('' +
 		'<ul class="nav nav-tabs tab-navigation" id="album-tab-nav" data-spy="affix" data-offset-top="50">' +
+		'	<li class="searchable"><a href="#star-song-tab" data-toggle="tab"><i class="icon-music"></i>Songs</a></li>' +
 		'	<li class="searchable"><a href="#artist-tab" data-toggle="tab"><i class="icon-music"></i>Albums</a></li>' +
 		'	<li class="searchable"><a href="#artist-popular-tab" data-toggle="tab"><i class="icon-sort-by-attributes-alt"></i>Popular</a></li>' +
 		'	<li><a href="#artist-info-tab" data-toggle="tab"><i class="icon-info"></i>Artist Information</a></li>' +
@@ -48,6 +51,7 @@ s2t.main.createAlbumView = function (data) {
 
 	var tabContent = jQuery('' +
 		'<div class="tab-content">' +
+		'	<div class="tab-pane fade active" id="star-song-tab"></div>' +
 		'	<div class="tab-pane fade active" id="artist-tab"></div>' +
 		'	<div class="tab-pane fade" id="artist-popular-tab"></div>' +
 		'	<div class="tab-pane fade" id="artist-info-tab"></div>' +
@@ -61,11 +65,36 @@ s2t.main.createAlbumView = function (data) {
 	var tabRelated = jQuery('#related-artist-tab');
 	var tabInfo    = jQuery('#artist-info-tab');
 	var tabPopular = jQuery('#artist-popular-tab');
+	var tabSongs   = jQuery('#star-song-tab');
+
+	var artistSongTable = jQuery('' +
+		'<div class="col-lg-12">' +
+		'	<table class="random-table table table-condensed">' +
+		'		<thead>' +
+		'			<tr>' +
+		'				<td>Title</td>' +
+		'				<td>Artist</td>' +
+		'				<td>Time</td>' +
+		'				<td>Album</td>' +
+		'				<td></td>' +
+		'			</tr>' +
+		'		</thead>' +
+		'		<tbody></tbody>' +
+		'	</table>' +
+		'</div>'
+	);
+	
+	
 
 	//collect data
 	var artistId = data.artist.id;
 	var artistName = data.artist.name;
 	var albumList = data.artist.album;
+	
+	//get Artist Songs
+	s2t.main.addArtistSongs(artistSongTable, artistName, artistId);
+	
+	tabSongs.append(artistSongTable);
 
 	//Set artist image and name
 	s2t.lastfm.getArtistInfo(artistName, function (data) {
@@ -508,4 +537,19 @@ s2t.main.getRelatedArtistsView = function(data, callback) {
 	} else {
 		callback(simFail);
 	}
+}
+
+s2t.main.addArtistSongs = function(table, artistName, artistId) {
+	var query = '"'+artistName+'"';
+	console.log(query);
+		s2t.api.search(undefined, undefined, undefined, query, 100, undefined, undefined, function (data) {
+		var songArray = data.searchResult.match;
+		for (var i = 0; i < songArray.length; i++) {
+			if(typeof artistId !== 'undefined') {
+				s2t.main.getSingleSongRow(artistId, songArray[i], function (row) {
+					table.find('tbody').append(row);
+				});
+			}
+		}
+	});
 }

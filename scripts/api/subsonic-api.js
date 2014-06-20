@@ -240,7 +240,6 @@ s2t.api.getStarred = function (callback)
 	});
 }
 
-
 s2t.api.getRandomSongs = function (size, genre, fromYear, toYear, musicFolderId, callback)
 {
 	var command = 'getRandomSongs';
@@ -293,6 +292,88 @@ s2t.api.search3 = function (query, artistCount, artistOffset, albumCount, albumO
 	if(songOffset !== false) {
 		params['songOffset'] = songOffset;
 	}
+
+	s2t.api.execCommand(command, params, function(data) {
+		callback(data);
+	});
+}
+
+s2t.api.search2 = function (query, artistCount, artistOffset, albumCount, albumOffset, songCount, songOffset, callback)
+{
+	var command = 'search2';
+	var params = {
+		query: query
+	};
+
+	if(artistCount !== false) {
+		params['artistCount'] = artistCount;
+	}
+	if(artistOffset !== false) {
+		params['artistOffset'] = artistOffset;
+	}
+	if(albumCount !== false) {
+		params['albumCount'] = albumCount;
+	}
+	if(albumOffset !== false) {
+		params['albumOffset'] = albumOffset;
+	}
+	if(songCount !== false) {
+		params['songCount'] = songCount;
+	}
+	if(songOffset !== false) {
+		params['songOffset'] = songOffset;
+	}
+
+	s2t.api.execCommand(command, params, function(data) {
+		callback(data);
+	});
+}
+
+s2t.api.search = function (artist, album, title, any, count, offset, newerThan, callback)
+{
+	var command = 'search';
+	
+	var params = {};
+
+	if(artist !== false) {
+		params['artist'] = artist;
+	}
+	if(album !== false) {
+		params['album'] = album;
+	}
+	if(title !== false) {
+		params['title'] = title;
+	}
+	if(any !== false) {
+		params['any'] = any;
+	}
+	if(count !== false) {
+		params['count'] = count;
+	}
+	if(offset !== false) {
+		params['offset'] = offset;
+	}
+	if(newerThan !== false) {
+		params['newerThan'] = newerThan;
+	}
+		s2t.api.execCommand(command, params, function(data) {
+		callback(data);
+	});
+}
+
+s2t.api.getArtistSongs2 = function (query, callback)
+{
+	var command = 'search2';
+	var params = {
+		query: query
+	};
+
+		params['artistCount'] = undefined;
+		params['artistOffset'] = undefined;
+		params['albumCount'] = undefined;
+		params['albumOffset'] = undefined;
+		params['songCount'] = 120;
+		params['songOffset'] = undefined;
 
 	s2t.api.execCommand(command, params, function(data) {
 		callback(data);
