@@ -9,7 +9,6 @@ s2t.main = s2t.main || {}
 s2t.main.createPlaylistAccordion = function () {
 	s2t.api.getPlaylists(function(data) {
 
-		console.log(data.playlists.playlist);
 		var playlistArray = data.playlists.playlist;
 		var playlistMap = [];
 		var accordion = jQuery('#playlist-accordion');
@@ -38,6 +37,7 @@ s2t.main.createPlaylistAccordion = function () {
 					list.append(listItem);
 					playlistMap[playlistName.toString()] = playlistId.toString();
 					s2t.playlistMap[playlistName.toString()] = playlistId.toString();
+					console.log(playlistId);
 				}
 			} else {
 				var playlistId = playlistArray.id;
@@ -46,11 +46,11 @@ s2t.main.createPlaylistAccordion = function () {
 				list.append(listItem);
 				playlistMap[playlistName.toString()] = playlistId.toString();
 				s2t.playlistMap[playlistName.toString()] = playlistId.toString();
+				
 			}
 
 			playlistToggle.on('click', function() {
 				jQuery('#playlist-accordion').mCustomScrollbar("update");
-				console.log("updateaccordion");
 			});
 
 			playlistInner.append(list);

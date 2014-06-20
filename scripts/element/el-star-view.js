@@ -261,6 +261,112 @@ s2t.main.getSingleSongRow = function(artistId, song, callback) {
 
 	callback(row);
 }
+s2t.main.getSingleSongRowPlaylist = function(artistId, song, callback) {
+	var row = jQuery('<tr class="artistItem playlistItem"></tr>');
+
+	var timeArray 	  = s2t.main.functions.secondsToTime(song.duration);
+	var time 		  = (timeArray.h > 0) ? timeArray.h + ':' + timeArray.m + ':' + timeArray.s : timeArray.m + ':' + timeArray.s;
+	var duration 	  = jQuery('<td class="time">' + time + '</td>');
+
+	var dataSignature = {
+		albumArtist: song.artist.toString().replace("'", ""), //Escape it!
+		artistId: 	 artistId.toString(),
+		albumId: 	 song.parent.toString(),
+		songId: 	 song.id.toString(),
+		albumName: 	 (_.isUndefined(song.album)) 	? 'false' : song.album.toString().replace("'", ""),
+		songYear: 	 (_.isUndefined(song.year)) 	? 'false' : song.year.toString().replace("'", ""),
+		songBitrate: (_.isUndefined(song.bitRate)) 	? 'false' : song.bitRate.toString().replace("'", ""),
+		songParent:  (_.isUndefined(song.parent)) 	? 'false' : song.parent.toString().replace("'", ""),
+		songSize: 	 (_.isUndefined(song.size)) 	? 'false' : song.size.toString().replace("'", ""),
+		duration: 	 (_.isUndefined(song.duration)) ? 'false' : song.duration.toString().replace("'", ""),
+		songTitle: 	 (_.isUndefined(song.title)) 	? 'false' : song.title.toString().replace("'", ""),
+		trackTime: 	 time.toString()
+	}
+
+
+	//save in map for toptracks
+	var key = song.title.toString().replace("'", "").toLowerCase();
+	var topTrack = s2t.trackMap[key];
+	if(typeof topTrack !== 'undefined') {
+		jQuery.extend(topTrack, dataSignature);
+		s2t.topTrackList.push(topTrack);
+	}
+
+	var albumName  = typeof song.album  !== 'undefined' ? song.album.toString() : false
+	var albumId    = typeof song.parent !== 'undefined' ? song.parent.toString() : false
+	var artistName = typeof song.artist !== 'undefined' ? song.artist.toString() : false
+
+	var song_   = jQuery("<td class='song'><a href='#' data-signature='" + JSON.stringify(dataSignature) + "'>" + song.title + "</a></td>");
+	var artist = jQuery("<td class='artist'><a href='#' data-artistId='" + artistId + "'>" + artistName + "</a></td>");
+	var album  = jQuery("<td class='album'><a href='#' data-albumId='" + albumId + "'>" + albumName + "</a></td>");
+
+	var opts = jQuery('<td class="options"></td>');
+	var optAdd = jQuery('<i class="icon-plus"></i>');
+
+	var optStar;
+
+
+	if(s2t.main.isStarred(song.id) === true) {
+		optStar = jQuery('<i class="icon-star"></i>');
+	} else {
+		optStar = jQuery('<i class="icon-star-empty"></i>');
+	}
+	s2t.behaviour.setStarBehaviour(optStar, song.id);
+
+	//Behaviour
+	optAdd.on('click', function (event) {
+		event.preventDefault();
+		var songData = jQuery(this).parents('tr').find('.song a').data('signature');
+		s2t.main.addSongToPlaylist(songData);
+	});
+
+	//Behaviour
+	s2t.behaviour.setArtistClickBehaviour(artist.find('a'));
+
+	//Row Rightclick
+	row.on('mousedown', function(event){
+		if( event.button == 2 ) {
+			jQuery('.album-container tbody tr').removeClass('selected');
+			jQuery(this).addClass('selected');
+		}
+	});
+
+	//highglight selected row
+	row.on('click', function (event) {
+		jQuery('table tbody tr').removeClass('selected');
+		jQuery(this).addClass('selected');
+	});
+
+	//Row doubleclick
+	row.on('dblclick', function () {
+		var songData = jQuery(this).find('td.song a').data('signature');
+		s2t.main.addSongToPlaylist(songData);
+	});
+
+	row.draggable({
+		appendTo: "body",
+		cursor: "pointer",
+		distance: 7,
+		cursorAt: { top: 15, left: 15 },
+		connectToSortable: "table.playlist-table tbody",
+		helper: function (event) {
+			return jQuery("<div class='draggableMusicFile'><span></span></div>");
+		}
+	});
+
+	//Assemble
+	opts.append(optAdd);
+	opts.append(optStar);
+
+	row.append(song_);
+	row.append(artist);
+	row.append(duration);
+	row.append(album);
+	row.append(opts);
+
+	callback(row);
+}
+
 
 
 s2t.main.getFavoriteArtists = function() {

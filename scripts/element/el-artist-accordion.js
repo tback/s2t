@@ -41,9 +41,7 @@ s2t.main.createArtistAccordion = function (callback) {
 					var listItem = jQuery('<li><a href="#" data-artistId="' + artistId + '">' + artist + '</a></li>');
 					list.append(listItem);
 					artistArray.push(artist);
-					console.log(artistArray);
 					artistMap[artist.toString()] = artistId.toString();
-					console.log(artistMap);
 					s2t.artistMap[artist.toString()] = artistId.toString();
 				}
 			} else {
@@ -58,7 +56,6 @@ s2t.main.createArtistAccordion = function (callback) {
 
 			accordionToggle.on('click', function() {
 				jQuery('#artist-accordion').mCustomScrollbar("update");
-				console.log("updateaccordion");
 			});
 
 			accordionInner.append(list);
@@ -91,7 +88,6 @@ s2t.main.createArtistAccordion_ = function (callback) {
 		var artistArray = [];
 		var artistMap = [];
 		var accordion = jQuery('#artist-accordion');
-		console.log(data);
 
 
 		for (var i = 0; i < bigList.length; i++) {

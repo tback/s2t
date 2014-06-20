@@ -9,7 +9,6 @@ s2t.main = s2t.main || {}
 s2t.main.createAlbumView = function (data) {
 	var element = jQuery('div.artist-albums');
 	
-	console.log(data.artist.name);
 
 	//clean container
 	element.children().remove();
@@ -541,7 +540,6 @@ s2t.main.getRelatedArtistsView = function(data, callback) {
 
 s2t.main.addArtistSongs = function(table, artistName, artistId) {
 	var query = '"'+artistName+'"';
-	console.log(query);
 		s2t.api.search(undefined, undefined, undefined, query, 100, undefined, undefined, function (data) {
 		var songArray = data.searchResult.match;
 		for (var i = 0; i < songArray.length; i++) {

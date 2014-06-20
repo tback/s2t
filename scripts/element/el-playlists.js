@@ -45,7 +45,7 @@ s2t.main.displayPlaylist = function (playlistId)
 
 	var playlistSongTable = jQuery('' +
 		'<div class="col-lg-12">' +
-		'	<table class="random-table table table-condensed">' +
+		'	<table class="random-table playlistview-table table table-condensed">' +
 		'		<thead>' +
 		'			<tr>' +
 		'				<td>Title</td>' +
@@ -75,10 +75,12 @@ s2t.main.addPlaylistSongs = function(table, playlistId) {
 		var songArray = data.playlist.entry;
 
 		for (var i = 0; i < songArray.length; i++) {
-			var artistId = s2t.artistMap[songArray[i].artist];
+			var artistId = songArray[i].id;
+			console.log(songArray[i]);
 			if(typeof artistId !== 'undefined') {
-				s2t.main.getSingleSongRow(artistId, songArray[i], function (row) {
+				s2t.main.getSingleSongRowPlaylist(artistId, songArray[i], function (row) {
 					table.find('tbody').append(row);
+					
 				});
 			}
 		}
