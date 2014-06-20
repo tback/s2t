@@ -1,7 +1,7 @@
 var s2t = s2t || {}
 
 s2t.data = {
-	server: 'http://http://192.99.1.164:4040/',
+	server: 'http://192.99.1.164:4040/',
 	user: 'guest5',
 	pass: 'guest',
 	version: '1.9.0',

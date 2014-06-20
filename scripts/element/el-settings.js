@@ -7,7 +7,6 @@ s2t.main = s2t.main || {}
  :: initialize Settings
  ---------------------------------------------------*/
 s2t.main.initSettings = function () {
-	var myserver = 'http://192.99.1.164:4040/';
 
 	var settingsContainer = jQuery('#settings');
 
@@ -30,7 +29,7 @@ s2t.main.initSettings = function () {
 	});
 
 
-/* 	var inputServer = settingsContainer.find('input.server'); */
+	var inputServer = settingsContainer.find('input.server');
 	var inputUser   = settingsContainer.find('input.username');
 	var inputPass   = settingsContainer.find('input.password');
 	var buttonTest  = settingsContainer.find('button.testserver');
@@ -41,7 +40,7 @@ s2t.main.initSettings = function () {
 	var fail = settingsContainer.find('i.fail');
 
 	if(s2t.data.server !== false) {
-		s2t.data.server = myserver;
+		inputServer.val(s2t.data.server);
 	}
 	if(s2t.data.user !== false) {
 		inputUser.val(s2t.data.user);
@@ -53,7 +52,7 @@ s2t.main.initSettings = function () {
 	buttonConnection.on('click', function(event) {
 		event.preventDefault();
 
-		s2t.data.server = myserver;
+		s2t.data.server = inputServer.val();
 		s2t.data.user	= inputUser.val();
 		s2t.data.pass   = inputPass.val();
 
@@ -70,13 +69,13 @@ s2t.main.initSettings = function () {
 	});
 
 	buttonTest.on('click', function() {
-/* 		inputServer.val('http://demo.subsonic.org/'); */
+		inputServer.val('http://demo.subsonic.org/');
 		inputUser.val('guest1');
 		inputPass.val('guest');
 	});
 
 	buttonSave.on('click', function() {
-		s2t.data.server = myserver;
+		s2t.data.server = inputServer.val();
 		s2t.data.user	= inputUser.val();
 		s2t.data.pass   = inputPass.val();
 
