@@ -6,6 +6,7 @@ s2t.main = s2t.main || {}
 s2t.main.displayPlaylist = function (playlistId) 
 	{
 	var element = jQuery('div.artist-albums');
+	s2t.currentPlaylistId = playlistId;
 
 	//clean container
 	element.children().remove();

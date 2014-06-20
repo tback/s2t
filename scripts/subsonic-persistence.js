@@ -41,6 +41,9 @@ s2t.topTrackList = [];
 s2t.starredObjects = [];
 //plalistMap for search purposes (!)
 s2t.playlistMap = [];
+//currentview playlist id for delete purposes (!)
+s2t.currentPlaylist = "";
+
 
 s2t.initializePersistence = function () {
 	//fetch data

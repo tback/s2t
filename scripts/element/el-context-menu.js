@@ -72,10 +72,7 @@ s2t.main.initializeCustomContextMenu = function () {
 			addToPlaylist: {
 				name: "Add To Playlist", callback: function (key, opt) {
 					var song = opt.$trigger.find('td.song a').data('signature');
-					console.log(song.songId);
-					s2t.api.updatePlaylist(1,undefined, undefined, undefined, song.songId, undefined, function (data){
-					console.log(data);
-					});
+					s2t.main.showAddToPlaylist(song.songId);
 				}
 			}
 
@@ -168,36 +165,22 @@ s2t.main.initializeCustomContextMenu = function () {
 //					s2t.sound.play(song.songId);
 				}
 			},
-			/*
-fold1: {
-                name: "Add To Playlist test",           
-                        items: {
-                            "fold1-key1": {name: "alpha"},
-                            "fold1-key2": {name: "bravo"},
-                            "fold1-key3": {name: "charlie"}
-                        }
-                }
-            },
-*/
 			addToPlaylist: {
 				name: "Add To Playlist", callback: function (key, opt) {
 					var song = opt.$trigger.find('td.song a').data('signature');
-					console.log(song.songId);
-					s2t.api.updatePlaylist(1,undefined, undefined, undefined, song.songId ,undefined, function (data){
-					console.log(data);
-					});
+					s2t.main.showAddToPlaylist(song.songId);
 				}
 			},
 			removeFromPlaylist: {
 				name: "Remove From Playlist", callback: function (key, opt) {
 					var song = opt.$trigger.find('td.song a').data('signature');
 					console.log(song.songId);
-					s2t.api.updatePlaylist(1,undefined, undefined, undefined, undefined, opt.$trigger.index(), function (data){
+					s2t.api.updatePlaylist(s2t.currentPlaylistId,undefined, undefined, undefined, undefined, opt.$trigger.index(), function (data){
 					console.log(data);
 					});
-				}
-			}
+                }
 
+			}
 		}
 	});
 }
