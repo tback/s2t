@@ -98,12 +98,37 @@ s2t.main.initializeCustomContextMenu = function () {
 			addToPlaylist: {
 				name: "Add To Playlist", callback: function (key, opt) {
 					var song = opt.$trigger.find('td.song a').data('signature');
-					console.log(song.songId);
-					s2t.api.updatePlaylist(1, undefined, undefined, undefined, song.songId, undefined, function (data){
-					console.log(data);
-					});
+					s2t.main.showAddToPlaylist(song.songId);
 				}
-			}
+			},
+
+		}
+	});
+	
+	$.contextMenu({
+		// define which elements trigger this menu
+		selector: '#group-playlist div.accordion-inner ul li.playlistmenulist',
+		animation: {
+			show: 'fadeIn',
+			hide: 'fadeOut'
+		},
+		delay: '100',
+		items: {
+			remove: {
+				name: "Remove", callback: function (key, opt) {
+					var playlistId = opt.$trigger.find('a').data('playlistid');
+					console.log(playlistId);
+					s2t.api.deletePlaylist(playlistId, function(data){});
+					s2t.main.refreshPlaylistAccordion();
+					jQuery('#playlist-accordion').trigger('click');
+				}
+			},
+			separator1: "-----",
+			addToPlaylist: {
+				name: "Rename", callback: function (key, opt) {
+					var song = opt.$trigger.find('td.song a').data('signature');
+				}
+			},
 
 		}
 	});

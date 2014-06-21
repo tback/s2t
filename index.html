@@ -62,6 +62,8 @@
 	<script src="scripts/element/el-playlists.js"></script>
 	<script src="scripts/element/el-shortcuts.js"></script>
 	<script src="scripts/element/el-addtoplaylist.js"></script>
+	<script src="scripts/element/el-createplaylist.js"></script>
+
 
 	<script src="scripts/subsonic-app.js"></script>
 	<script src="scripts/subsonic-functions.js"></script>
@@ -100,16 +102,6 @@
 				<div id="show-starred" class="starred">
 					<i class="icon-star"></i><span>Starred</span>
 				</div>
-				
-			<!--
-				<div class="playlists-panel">
-						<ul>
-							<li><a href="#" data-artistid="258">Alice Russell</a></li>
-							<li><a href="#" data-artistid="251">Alkistis Protopsalti &amp; Goran Bregovic</a></li>
-
-						</ul>
-				</div>
--->
 				<div class="accordion show-playlists" id="playlist-accordion"></div>
 
 
@@ -240,19 +232,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="addtoplaylists" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
+	<div class="modal fade" id="addtoplaylists" tabindex="-1" role="dialog" aria-labelledby="playlistLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Choose Playlist</h4>
 				</div>
-				<div id="addtoplaylisttable" class="modal-body">
-				</div>
+				<div id="addtoplaylisttable" class="modal-body"></div>
 				<div class="modal-footer">
 					<div class="row">
 
-						<div class="col-lg-6">
+						<div class="col-lg-12">
 							<button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
 							<button type="button" class="btn add">Add to Playlists</button>
 						</div>
@@ -262,6 +253,34 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="createplaylist" tabindex="-1" role="dialog" aria-labelledby="createplaylistLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Create Playlist</h4>
+				</div>
+				<div class="modal-body">
+					<form method="post" id="dropdown-login" action="login" accept-charset="UTF-8">
+						<div class="row col-lg-12 nofloat">
+							<input class="form-control newplaylist" type="text" placeholder="Playlist Name" id="newplaylist" name="newplaylist">
+							<a>Make playlist private </a><input class="private" type="checkbox" placeholder="" id="private" name="private">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="row">
+						<div class="col-lg-12">
+							<button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn add">Create Playlists</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 
 
 </body>

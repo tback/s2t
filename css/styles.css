@@ -1567,6 +1567,12 @@ pre code {
   .col-lg-12 {
     float: left;
   }
+  .col-lg-12.nofloat {
+    float: none;
+  }
+  #addtoplaylists .col-lg-12 {
+    float: right;
+  }
   .col-lg-1 {
     width: 8.333333333333332%;
   }
@@ -6228,6 +6234,14 @@ body.view-container section.view-bottom {
   color: #D6DDDD;
   border-top: 1px solid #656565;
 }
+
+#artist-panel #newplaylist {
+	margin-top: -22px;
+	margin-left: 90px;
+	position: absolute;
+	color: #D6DDDD;
+	z-index: 1;
+}
 #artist-panel div.starred,
 #artist-panel div.playlists,
 #artist-panel a.playlists,
@@ -6239,19 +6253,22 @@ body.view-container section.view-bottom {
 #artist-panel div.starred:hover,
 #artist-panel div.playlists:hover,
 #artist-panel a.playlists:hover,
-#artist-panel div.djrandom:hover {
+#artist-panel div.djrandom:hover,
+#artist-panel #newplaylist:hover {
   cursor: pointer;
 }
 #artist-panel div.starred:hover i,
 #artist-panel div.playlists:hover i,
 #artist-panel a.playlists:hover i,
-#artist-panel div.djrandom:hover i {
+#artist-panel div.djrandom:hover i, 
+#artist-panel #newplaylist:hover i{
   color: #d6284f;
 }
 #artist-panel div.starred i,
 #artist-panel div.playlists i,
 #artist-panel a.playlists i,
-#artist-panel div.djrandom i {
+#artist-panel div.djrandom i,
+#artist-panel #newplaylist {
   font-size: 12px;
 }
 #artist-panel div.starred span,
@@ -8977,7 +8994,7 @@ body {
   background: #474747;
   font-weight: normal;
 }
-#settings .btn.save {
+#settings .btn.save, #addtoplaylists .btn.add  {
   background: #d6284f;
   font-weight: bold;
 }
@@ -9362,11 +9379,19 @@ body {
   cursor: pointer;
   color: #d6284f;
 }
+/*
 .artist-albums table.album-table tr td.options i:nth-of-type(odd),
 .artist-albums table.star-table tr td.options i:nth-of-type(odd),
 .artist-albums table.random-table tr td.options i:nth-of-type(odd) {
   margin-right: 10px;
 }
+*/
+.artist-albums table.album-table tr td.options i,
+.artist-albums table.star-table tr td.options i,
+.artist-albums table.random-table tr td.options i {
+  margin-right: 10px;
+}
+icon-star-empty
 .artist-albums table.album-table tr td.time,
 .artist-albums table.star-table tr td.time,
 .artist-albums table.random-table tr td.time {
@@ -9574,3 +9599,5 @@ table.similar-table td div {
   color: #CCCCCC;
   text-shadow: 0 -1px 1px #666666, 0 1px 1px #ffffff;
 }
+// New Playlist Button
+

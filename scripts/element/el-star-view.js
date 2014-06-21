@@ -88,7 +88,7 @@ s2t.main.createStarView = function () {
 				'				<td>Artist</td>' +
 				'				<td>Time</td>' +
 				'				<td>Album</td>' +
-				'				<td></td>' +
+				'				<td><button type="button">Add</button></td>' +
 				'			</tr>' +
 				'		</thead>' +
 				'		<tbody></tbody>' +
@@ -197,6 +197,7 @@ s2t.main.getSingleSongRow = function(artistId, song, callback) {
 
 	var opts = jQuery('<td class="options"></td>');
 	var optAdd = jQuery('<i class="icon-plus"></i>');
+	var optCheck = jQuery('<input id="addtoplaylist" type="checkbox"/></td>');
 
 	var optStar;
 
@@ -252,6 +253,7 @@ s2t.main.getSingleSongRow = function(artistId, song, callback) {
 	//Assemble
 	opts.append(optAdd);
 	opts.append(optStar);
+	opts.append(optCheck);
 
 	row.append(song_);
 	row.append(artist);

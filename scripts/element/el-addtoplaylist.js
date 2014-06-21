@@ -37,7 +37,6 @@ s2t.main.showAddToPlaylist = function (songId) {
 	buttonAdd.on('click', function() {
 		for (var i = 0; i < playlisttoAddIdArray.length; i++){
 			s2t.api.updatePlaylist(playlisttoAddIdArray[i],undefined, undefined, undefined, songId ,undefined, function (data){
-			console.log(data);
 			});
 		}
 		$('#addtoplaylisttable div').empty().remove();
@@ -63,22 +62,18 @@ s2t.main.showAddToPlaylist = function (songId) {
 				console.log(playlisttoAddIdArray.indexOf(firstColumn.textContent));
 			} else {
 				var index = playlisttoAddIdArray.indexOf(firstColumn.textContent);
-				console.log(index);
-				playlisttoAddIdArray.splice(index, 1);
+				console.log(firstColumn.textContent);
+				playlisttoAddIdArray.splice(firstColumn.textContent, 1);
 			}
-			console.log(playlisttoAddIdArray);
         };
     } 
 }
 
 s2t.main.addPlaylists = function(table) {
 		var playlistsMap = s2t.playlistMap;
-		console.log(playlistsMap);
-
 		for (var key in playlistsMap) {
 			var playlistName = key;
 			var playlistId = playlistsMap[key];
-			console.log(playlistId + playlistName);
 			var tablentry = '<tr><td>'+playlistId+'</td><td>'+ playlistName + '</td><td><input type="checkbox"/></td></tr>';
 			table.find('tbody').append(tablentry);
 		}

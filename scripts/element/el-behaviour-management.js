@@ -25,6 +25,14 @@ s2t.behaviour.setPlaylistClickBehaviour = function (element) {
 	});
 }
 
+s2t.behaviour.setCreatePlaylistClickBehaviour = function (element) {
+
+	element.on('click', function (event) {
+		event.preventDefault();
+		jQuery('#createplaylist').modal('show');
+	});
+}
+
 s2t.behaviour.setStarBehaviour = function (element, id) {
 
 	if(_.has(s2t.starredObjects, id)) {

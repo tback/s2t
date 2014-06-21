@@ -22,11 +22,10 @@ s2t.main.initializeApp = function () {
 		
 		s2t.main.createPlaylistAccordion();
 		
-		s2t.main.createCustomScrollbar(jQuery('.playlist-table'));
-
 	});
 
 	s2t.main.initSettings();
+	s2t.main.initCreatePlaylist();
 
 	s2t.main.initializeCustomContextMenu();
 
