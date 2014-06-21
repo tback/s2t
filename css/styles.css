@@ -6015,18 +6015,18 @@ table tbody tr td {
 table.dark {
   background-color: #474747;
 }
-table.dark tbody tr:nth-child(odd) {
+table.dark tbody tr:nth-child(odd) td {
   background-color: #2A2A2A;
 }
-table.dark tbody tr:nth-child(even) {
+table.dark tbody tr:nth-child(even) td {
   background-color: #474747;
 }
-table.dark tbody tr.selected,
-table.dark tbody tr.selected:hover {
+table.dark tbody tr.selected td,
+table.dark tbody tr.selected td:hover{
   background: #d6284f;
 }
-table.dark tbody tr.selected *,
-table.dark tbody tr.selected:hover * {
+table.dark tbody tr.selected td*,
+table.dark tbody tr.selected td:hover * {
   color: #e0e0e0;
 }
 table.dark tbody td {
@@ -9386,6 +9386,8 @@ body {
   margin-right: 10px;
 }
 */
+
+}
 .artist-albums table.album-table tr td.options i,
 .artist-albums table.star-table tr td.options i,
 .artist-albums table.random-table tr td.options i {
