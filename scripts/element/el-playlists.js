@@ -73,14 +73,13 @@ s2t.main.displayPlaylist = function (playlistId)
 
 s2t.main.addPlaylistSongs = function(table, playlistId) {
 	s2t.api.getPlaylist(playlistId, function(data) {
+		console.log(data);
 		var songArray = data.playlist.entry;
 		if (songArray == undefined){
 			table.find('tbody').append('<h1>No Songs in this playlist!</h1>');
-		}
-		else {
+		} else if (songArray.length > 1) {
 			for (var i = 0; i < songArray.length; i++) {
 				var artistId = songArray[i].id;
-				console.log(songArray[i]);
 				if(typeof artistId !== 'undefined') {
 					s2t.main.getSingleSongRowPlaylist(artistId, songArray[i], function (row) {
 						table.find('tbody').append(row);
@@ -88,6 +87,14 @@ s2t.main.addPlaylistSongs = function(table, playlistId) {
 					});
 				}
 			}
+		} else {	
+			var artistId = songArray.id;
+				if(typeof artistId !== 'undefined') {
+					s2t.main.getSingleSongRowPlaylist(artistId, songArray, function (row) {
+						table.find('tbody').append(row);
+						
+					});
+				}	
 		}
 	});
 }
