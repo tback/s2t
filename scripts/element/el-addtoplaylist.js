@@ -11,7 +11,6 @@ s2t.main.showAddToPlaylist = function (songId) {
 	var playlistsContainer = jQuery('#addtoplaylists');
 	var settings
 	playlistsContainer.modal('show');
-	var playlisttoAddIdArray = []
 	
 	var tableLocation = jQuery('#addtoplaylisttable');
 	var playlistTable = jQuery('' +
@@ -29,46 +28,11 @@ s2t.main.showAddToPlaylist = function (songId) {
 		'</div>'
 	);
 	tableLocation.append(playlistTable);
-	s2t.main.addPlaylists(playlistTable);
+	s2t.main.addPlaylists(playlistTable, songId);
 	
-	var buttonAdd  = playlistsContainer.find('button.add');
-	var buttonCancel  = playlistsContainer.find('button.cancel');
-	
-	buttonAdd.on('click', function() {
-		for (var i = 0; i < playlisttoAddIdArray.length; i++){
-			s2t.api.updatePlaylist(playlisttoAddIdArray[i],undefined, undefined, undefined, songId ,undefined, function (data){
-			});
-		}
-		$('#addtoplaylisttable div').empty().remove();
-		playlisttoAddIdArray = [];
-		s2t.main.displayPlaylist(s2t.currentPlaylistId);
-		playlistsContainer.modal('hide');
-	});
-	buttonCancel.on('click', function() {
-		$('#addtoplaylisttable div').empty().remove();
-		playlisttoAddIdArray = [];
-		playlistsContainer.modal('hide');
-	});
-	
-	checkboxes = document.getElementsByTagName("input"); 
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        var checkbox = checkboxes[i];
-        checkbox.onclick = function() {
-            var currentRow = this.parentNode.parentNode;
-            var firstColumn = currentRow.getElementsByTagName("td")[0];
-			if (playlisttoAddIdArray.indexOf(firstColumn.textContent) == -1){
-				playlisttoAddIdArray.push(firstColumn.textContent);
-				console.log(playlisttoAddIdArray.indexOf(firstColumn.textContent));
-			} else {
-				var index = playlisttoAddIdArray.indexOf(firstColumn.textContent);
-				console.log(firstColumn.textContent);
-				playlisttoAddIdArray.splice(firstColumn.textContent, 1);
-			}
-        };
-    } 
 }
 
+/*
 s2t.main.addPlaylists = function(table) {
 		var playlistsMap = s2t.playlistMap;
 		for (var key in playlistsMap) {
@@ -77,4 +41,63 @@ s2t.main.addPlaylists = function(table) {
 			var tablentry = '<tr><td>'+playlistId+'</td><td>'+ playlistName + '</td><td><input type="checkbox"/></td></tr>';
 			table.find('tbody').append(tablentry);
 		}
+}
+*/
+s2t.main.addPlaylists = function(table, songId) {
+		var playlistsContainer = jQuery('#addtoplaylists');
+		var playlisttoAddIdArray = []
+		s2t.api.getPlaylists(function(data) {
+			var playlistsArray = data.playlists.playlist;
+			for (var entry in playlistsArray) {
+				if (playlistsArray[entry].owner == s2t.data.user){
+					console.log(playlistsArray[entry]);
+					var playlistName = playlistsArray[entry].name;
+					var playlistId = playlistsArray[entry].id;
+					var tablentry = '<tr><td>'+playlistId+'</td><td>'+ playlistName + '</td><td><input id="addtoplaylistbox" type="checkbox"/></td></tr>';
+					table.find('tbody').append(tablentry);
+					
+				}
+			}
+			checkboxes = document.querySelectorAll("input#addtoplaylistbox")
+			console.log(checkboxes.length);
+			 for (var i = 0; i < checkboxes.length; i++) {
+		        var checkbox = checkboxes[i];
+		        console.log(checkbox);
+		        	checkbox.onclick = function() {
+		            var currentRow = this.parentNode.parentNode;
+		            var firstColumn = currentRow.getElementsByTagName("td")[0];
+						if (playlisttoAddIdArray.indexOf(firstColumn.textContent) == -1){
+							playlisttoAddIdArray.push(firstColumn.textContent);
+							console.log(playlisttoAddIdArray.indexOf(firstColumn.textContent));
+							console.log("clickedbox");
+							console.log(playlisttoAddIdArray);
+						} else {
+							var index = playlisttoAddIdArray.indexOf(firstColumn.textContent);
+							console.log(firstColumn.textContent);
+							playlisttoAddIdArray.splice(firstColumn, 1);
+							console.log("unclickedbox");
+							console.log(playlisttoAddIdArray);
+						}
+					}
+			}
+		});
+		var buttonAdd  = playlistsContainer.find('button.add');
+		var buttonCancel  = playlistsContainer.find('button.cancel');
+		
+		buttonAdd.on('click', function() {
+			for (var i = 0; i < playlisttoAddIdArray.length; i++){
+				s2t.api.updatePlaylist(playlisttoAddIdArray[i],undefined, undefined, undefined, songId ,undefined, function (data){
+				console.log(data);
+				});
+			}
+			$('#addtoplaylisttable div').empty().remove();
+			playlisttoAddIdArray = [];
+			s2t.main.displayPlaylist(s2t.currentPlaylistId);
+			playlistsContainer.modal('hide');
+		});
+		buttonCancel.on('click', function() {
+			$('#addtoplaylisttable div').empty().remove();
+			playlisttoAddIdArray = [];
+			playlistsContainer.modal('hide');
+		});
 }

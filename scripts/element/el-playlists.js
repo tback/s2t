@@ -74,15 +74,19 @@ s2t.main.displayPlaylist = function (playlistId)
 s2t.main.addPlaylistSongs = function(table, playlistId) {
 	s2t.api.getPlaylist(playlistId, function(data) {
 		var songArray = data.playlist.entry;
-
-		for (var i = 0; i < songArray.length; i++) {
-			var artistId = songArray[i].id;
-			console.log(songArray[i]);
-			if(typeof artistId !== 'undefined') {
-				s2t.main.getSingleSongRowPlaylist(artistId, songArray[i], function (row) {
-					table.find('tbody').append(row);
-					
-				});
+		if (songArray == undefined){
+			table.find('tbody').append('<h1>No Songs in this playlist!</h1>');
+		}
+		else {
+			for (var i = 0; i < songArray.length; i++) {
+				var artistId = songArray[i].id;
+				console.log(songArray[i]);
+				if(typeof artistId !== 'undefined') {
+					s2t.main.getSingleSongRowPlaylist(artistId, songArray[i], function (row) {
+						table.find('tbody').append(row);
+						
+					});
+				}
 			}
 		}
 	});

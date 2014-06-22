@@ -402,6 +402,17 @@ s2t.api.getPlaylists = function (callback)
 		callback(response);
 	});
 }
+s2t.api.getUserPlaylists = function (username, callback)
+{
+	var command = 'getPlaylists';
+	var params = {
+		usrname: username,
+	}
+
+	s2t.api.execCommand(command, false, function(response) {
+		callback(response);
+	});
+}
 
 
 s2t.api.createPlaylist = function (playlistId, name, songIdArray, callback)
