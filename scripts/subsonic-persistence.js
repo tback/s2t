@@ -1,7 +1,7 @@
 var s2t = s2t || {}
 
 s2t.data = {
-	server: 'http://demo.subsonic.org/',
+	server: 'http://192.99.1.164:4040/',
 	user: 'guest5',
 	pass: 'guest',
 	version: '1.9.0',
@@ -39,6 +39,10 @@ s2t.trackMap = [];
 s2t.topTrackList = [];
 //starredObjects for search purposes (!)
 s2t.starredObjects = [];
+//plalistMap for search purposes (!)
+s2t.playlistMap = [];
+//currentview playlist id for delete purposes (!)
+s2t.currentPlaylist = "";
 
 
 s2t.initializePersistence = function () {

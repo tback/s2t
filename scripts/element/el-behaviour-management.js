@@ -10,10 +10,28 @@ s2t.behaviour.setArtistClickBehaviour = function (element) {
 
 		s2t.api.getArtist(artistId, function (data) {
 			s2t.main.createAlbumView(data);
+			console.log(data.artist.name);
 		});
 	});
 }
 
+s2t.behaviour.setPlaylistClickBehaviour = function (element) {
+
+	element.on('click', function (event) {
+		event.preventDefault();
+		var playlistId = jQuery(event.target).data('playlistid');
+		s2t.main.displayPlaylist(playlistId);
+		console.log(playlistId);
+	});
+}
+
+s2t.behaviour.setCreatePlaylistClickBehaviour = function (element) {
+
+	element.on('click', function (event) {
+		event.preventDefault();
+		jQuery('#createplaylist').modal('show');
+	});
+}
 
 s2t.behaviour.setStarBehaviour = function (element, id) {
 

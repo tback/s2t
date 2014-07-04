@@ -80,5 +80,6 @@ s2t.main.initSettings = function () {
 		s2t.data.pass   = inputPass.val();
 
 		$('#settings').modal('hide')
+		location.reload();
 	});
 }

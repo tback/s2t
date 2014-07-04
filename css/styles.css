@@ -1567,6 +1567,12 @@ pre code {
   .col-lg-12 {
     float: left;
   }
+  .col-lg-12.nofloat {
+    float: none;
+  }
+  #addtoplaylists .col-lg-12 {
+    float: right;
+  }
   .col-lg-1 {
     width: 8.333333333333332%;
   }
@@ -6009,18 +6015,18 @@ table tbody tr td {
 table.dark {
   background-color: #474747;
 }
-table.dark tbody tr:nth-child(odd) {
+table.dark tbody tr:nth-child(odd) td {
   background-color: #2A2A2A;
 }
-table.dark tbody tr:nth-child(even) {
+table.dark tbody tr:nth-child(even) td {
   background-color: #474747;
 }
-table.dark tbody tr.selected,
-table.dark tbody tr.selected:hover {
+table.dark tbody tr.selected td,
+table.dark tbody tr.selected td:hover{
   background: #d6284f;
 }
-table.dark tbody tr.selected *,
-table.dark tbody tr.selected:hover * {
+table.dark tbody tr.selected td*,
+table.dark tbody tr.selected td:hover * {
   color: #e0e0e0;
 }
 table.dark tbody td {
@@ -6228,8 +6234,17 @@ body.view-container section.view-bottom {
   color: #D6DDDD;
   border-top: 1px solid #656565;
 }
+
+#artist-panel #newplaylist {
+	margin-top: -22px;
+	margin-left: 90px;
+	position: absolute;
+	color: #D6DDDD;
+	z-index: 1;
+}
 #artist-panel div.starred,
 #artist-panel div.playlists,
+#artist-panel a.playlists,
 #artist-panel div.djrandom {
   border-bottom: 1px solid #1E1E1E;
   padding: 5px 15px;
@@ -6237,21 +6252,28 @@ body.view-container section.view-bottom {
 }
 #artist-panel div.starred:hover,
 #artist-panel div.playlists:hover,
-#artist-panel div.djrandom:hover {
+#artist-panel a.playlists:hover,
+#artist-panel div.djrandom:hover,
+#artist-panel #newplaylist:hover {
   cursor: pointer;
 }
 #artist-panel div.starred:hover i,
 #artist-panel div.playlists:hover i,
-#artist-panel div.djrandom:hover i {
+#artist-panel a.playlists:hover i,
+#artist-panel div.djrandom:hover i, 
+#artist-panel #newplaylist:hover i{
   color: #d6284f;
 }
 #artist-panel div.starred i,
 #artist-panel div.playlists i,
-#artist-panel div.djrandom i {
+#artist-panel a.playlists i,
+#artist-panel div.djrandom i,
+#artist-panel #newplaylist {
   font-size: 12px;
 }
 #artist-panel div.starred span,
 #artist-panel div.playlists span,
+#artist-panel a.playlists span,
 #artist-panel div.djrandom span {
   cursor: pointer;
   padding-left: 10px;
@@ -6259,6 +6281,7 @@ body.view-container section.view-bottom {
 }
 #artist-panel div.starred span.active,
 #artist-panel div.playlists span.active,
+#artist-panel a.playlists span.active,
 #artist-panel div.djrandom span.active {
   width: 0;
   height: 0;
@@ -6270,20 +6293,23 @@ body.view-container section.view-bottom {
 #artist-panel div.djrandom {
   border-top: 1px solid #656565;
 }
-#artist-panel #artist-accordion {
+#artist-panel #artist-accordion, #artist-panel #playlist-accordion {
   margin-bottom: 0px;
   overflow: hidden;
   border-top: 1px solid #656565;
 }
-#artist-panel #artist-accordion .accordion-group {
+#artist-panel #playlist-accordion {
+  border-bottom: 1px solid #1E1E1E;
+}
+#artist-panel #artist-accordion .accordion-group, #artist-panel #playlist-accordion .accordion-group  {
   border: none;
   border-radius: none;
   margin-bottom: 0px;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-heading:hover a.accordion-toggle {
+#artist-panel #artist-accordion .accordion-group .accordion-heading:hover a.accordion-toggle, #artist-panel #playlist-accordion .accordion-group .accordion-heading:hover a.accordion-toggle {
   color: #d6284f !important;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle {
+#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle, #artist-panel #playlist-accordion .accordion-group .accordion-heading a.accordion-toggle {
   padding: 5px 15px;
   color: #d6284f;
   text-decoration: none;
@@ -6291,7 +6317,7 @@ body.view-container section.view-bottom {
   border-bottom: 1px solid #1E1E1E;
   font-size: 12px;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle:before {
+#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle:before, #artist-panel #playlist-accordion .accordion-group .accordion-heading a.accordion-toggle:before {
   content: "\f107";
   position: absolute;
   top: 5px;
@@ -6307,14 +6333,14 @@ body.view-container section.view-bottom {
   font-weight: normal;
   font-size: 12px;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle:active {
+#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle:active, #artist-panel #playlist-accordion .accordion-group .accordion-heading a.accordion-toggle:active {
   color: #d6284f;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle.collapsed {
+#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle.collapsed, #artist-panel #playlist-accordion .accordion-group .accordion-heading a.accordion-toggle.collapsed {
   color: #D6DDDD;
   border-bottom: 1px solid #474747;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle.collapsed:before {
+#artist-panel #artist-accordion .accordion-group .accordion-heading a.accordion-toggle.collapsed:before, #artist-panel #playlist-accordion .accordion-group .accordion-heading a.accordion-toggle.collapsed:before {
   content: "\f104";
   position: absolute;
   top: 5px;
@@ -6330,15 +6356,18 @@ body.view-container section.view-bottom {
   font-weight: normal;
   font-size: 12px;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner {
+#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner, #artist-panel #playlist-accordion .accordion-group .accordion-body .accordion-inner {
   border-top: 1px solid #656565;
   padding: 0px;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner ul {
+#artist-panel .playlists-panel {
+  padding: 0px;
+}
+#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner ul, #artist-panel .playlists-panel ul,#artist-panel #playlist-accordion .accordion-group .accordion-body .accordion-inner ul {
   list-style: none;
   padding: 0;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner ul li a {
+#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner ul li a, #artist-panel .playlists-panel ul li a, #artist-panel #playlist-accordion .accordion-group .accordion-body .accordion-inner ul li a {
   color: #e0e0e0;
   text-decoration: none;
   display: block;
@@ -6348,7 +6377,7 @@ body.view-container section.view-bottom {
   overflow: hidden;
   font-size: 12px;
 }
-#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner ul li a:before {
+#artist-panel #artist-accordion .accordion-group .accordion-body .accordion-inner ul li a:before, #artist-panel .playlists-panel ul li a:before, #artist-panel #playlist-accordion .accordion-group .accordion-body .accordion-inner ul li a:before {
   content: "\f001";
   position: absolute;
   top: 5px;
@@ -8965,7 +8994,7 @@ body {
   background: #474747;
   font-weight: normal;
 }
-#settings .btn.save {
+#settings .btn.save, #addtoplaylists .btn.add  {
   background: #d6284f;
   font-weight: bold;
 }
@@ -9350,11 +9379,21 @@ body {
   cursor: pointer;
   color: #d6284f;
 }
+/*
 .artist-albums table.album-table tr td.options i:nth-of-type(odd),
 .artist-albums table.star-table tr td.options i:nth-of-type(odd),
 .artist-albums table.random-table tr td.options i:nth-of-type(odd) {
   margin-right: 10px;
 }
+*/
+
+}
+.artist-albums table.album-table tr td.options i,
+.artist-albums table.star-table tr td.options i,
+.artist-albums table.random-table tr td.options i {
+  margin-right: 10px;
+}
+icon-star-empty
 .artist-albums table.album-table tr td.time,
 .artist-albums table.star-table tr td.time,
 .artist-albums table.random-table tr td.time {
@@ -9562,3 +9601,5 @@ table.similar-table td div {
   color: #CCCCCC;
   text-shadow: 0 -1px 1px #666666, 0 1px 1px #ffffff;
 }
+// New Playlist Button
+
